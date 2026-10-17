@@ -6,13 +6,13 @@ export default function About() {
   return (
     <div className="min-h-screen pt-16 sm:pt-20">
       {/* Hero */}
-      <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[45vh] sm:h-[50vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img src={IMAGES.atelier} alt="Fashion Maven Atelier" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/60" />
         </div>
-        <div className="relative z-10 text-center px-4">
-          <p className="text-gold font-sans text-[10px] sm:text-xs tracking-[0.3em] uppercase mb-4">Our Story</p>
+        <div className="relative z-10 text-center px-4 max-w-2xl mx-auto">
+          <p className="text-gold font-sans text-[10px] sm:text-xs tracking-[0.3em] uppercase mb-3 sm:mb-4">Our Story</p>
           <h1 className="font-serif text-display text-white">About Fashion Maven</h1>
         </div>
       </section>
@@ -51,9 +51,9 @@ export default function About() {
                 <img src={IMAGES.atelier} alt="Fashion Maven Workshop"
                   className="w-full h-full object-cover" />
               </div>
-              <div className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 bg-gold text-ink p-4 sm:p-6 rounded-lg shadow-lg">
-                <p className="font-serif text-2xl sm:text-3xl font-bold">200+</p>
-                <p className="text-[10px] sm:text-[11px] tracking-wide">Brides & Counting</p>
+              <div className="absolute bottom-3 left-3 sm:-bottom-4 sm:-left-6 bg-gold text-ink p-3 sm:p-6 rounded-lg shadow-lg">
+                <p className="font-serif text-xl sm:text-3xl font-bold">200+</p>
+                <p className="text-[9px] sm:text-[11px] tracking-wide">Brides & Counting</p>
               </div>
             </div>
           </div>

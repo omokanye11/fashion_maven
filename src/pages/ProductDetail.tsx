@@ -42,12 +42,12 @@ export default function ProductDetail() {
 
   return (
     <div className="min-h-screen pt-16 sm:pt-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        <Link to="/shop" className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] text-ash hover:text-gold mb-6 sm:mb-8 tracking-wider uppercase">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
+        <Link to="/shop" className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] text-ash hover:text-gold mb-4 sm:mb-6 tracking-wider uppercase">
           <ArrowLeft size={14} strokeWidth={1.5} /> Back to Shop
         </Link>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12">
           {/* Images */}
           <div className="space-y-4">
             <div className="aspect-[3/4] rounded-lg overflow-hidden bg-cream">

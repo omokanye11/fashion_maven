@@ -35,22 +35,22 @@ export default function BridalCouture() {
   return (
     <div className="min-h-screen pt-16 sm:pt-20">
       {/* Hero */}
-      <section className="relative h-[50vh] sm:h-[60vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[45vh] sm:h-[55vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img src={IMAGES.bride1} alt="Bridal Couture" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/60" />
         </div>
-        <div className="relative z-10 text-center px-4">
-          <p className="text-gold font-sans text-[10px] sm:text-xs tracking-[0.3em] uppercase mb-4">Bridal Couture</p>
-          <h1 className="font-serif text-display text-white mb-4">Your Perfect <em className="text-gold">Dress</em></h1>
-          <p className="text-white/60 text-xs sm:text-base max-w-xl mx-auto leading-relaxed">
+        <div className="relative z-10 text-center px-4 max-w-2xl mx-auto">
+          <p className="text-gold font-sans text-[10px] sm:text-xs tracking-[0.3em] uppercase mb-3 sm:mb-4">Bridal Couture</p>
+          <h1 className="font-serif text-display text-white mb-3 sm:mb-4">Your Perfect <em className="text-gold">Dress</em></h1>
+          <p className="text-white/60 text-xs sm:text-base leading-relaxed">
             Every bride deserves a dress as unique as her love story. Let us create yours.
           </p>
         </div>
       </section>
 
       {/* Category Filter */}
-      <section className="py-5 sm:py-7 bg-white border-b border-pearl sticky top-16 sm:top-20 z-30">
+      <section className="py-4 sm:py-6 bg-white border-b border-pearl sticky top-16 sm:top-20 z-40 shadow-[0_2px_8px_rgba(0,0,0,0.03)]">
         <div className="max-w-7xl mx-auto px-4 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
           {categories.map(cat => (
             <button key={cat.value} onClick={() => setActiveCategory(cat.value)}
@@ -99,10 +99,10 @@ export default function BridalCouture() {
 
       {/* Enquiry Form Modal */}
       {showForm && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setShowForm(false)} />
-          <div className="relative bg-white rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-            <div className="p-6 sm:p-8">
+        <div className="fixed inset-0 z-[100] flex items-start sm:items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex-shrink-0" onClick={() => setShowForm(false)} />
+          <div className="relative bg-white rounded-xl shadow-2xl w-full max-w-lg my-4 sm:my-auto overflow-hidden">
+            <div className="p-5 sm:p-8 max-h-[85vh] overflow-y-auto">
               {formSubmitted ? (
                 <div className="text-center py-12">
                   <div className="w-14 h-14 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-4">

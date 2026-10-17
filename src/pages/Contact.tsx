@@ -27,7 +27,7 @@ export default function Contact() {
 
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-16">
             {/* Contact Form */}
             <div>
               <h2 className="font-serif text-2xl sm:text-3xl mb-6 text-ink">Send a Message</h2>

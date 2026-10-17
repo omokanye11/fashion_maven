@@ -81,6 +81,16 @@ export function Navbar() {
 
   useEffect(() => { setIsOpen(false); }, [location]);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('menu-open');
+    } else {
+      document.body.classList.remove('menu-open');
+    }
+    return () => { document.body.classList.remove('menu-open'); };
+  }, [isOpen]);
+
   const navLinks = [
     { to: '/', label: 'Home' },
     { to: '/bridal', label: 'Bridal' },
@@ -93,7 +103,7 @@ export function Navbar() {
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'bg-white/98 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.05)]' : 'bg-white/80 backdrop-blur-sm'
+        scrolled ? 'bg-white shadow-[0_1px_0_rgba(0,0,0,0.05)]' : 'bg-white/95 backdrop-blur-sm'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 sm:h-20">
@@ -118,10 +128,10 @@ export function Navbar() {
               ))}
             </div>
 
-            <div className="flex items-center space-x-3 sm:space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               <button
                 onClick={() => setCartOpen(true)}
-                className="relative p-2 text-ink hover:text-gold transition-colors"
+                className="relative p-2 mr-1 text-ink hover:text-gold transition-colors"
                 aria-label="Shopping bag"
               >
                 <ShoppingBag size={20} strokeWidth={1.5} />
@@ -140,8 +150,8 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="lg:hidden bg-white border-t border-pearl animate-fade-in">
-            <div className="px-6 py-8 space-y-1">
+          <div className="lg:hidden bg-white border-t border-pearl animate-fade-in max-h-[calc(100vh-4rem)] overflow-y-auto">
+            <div className="px-6 py-6 space-y-1">
               {navLinks.map(link => (
                 <Link
                   key={link.to}
@@ -297,9 +307,9 @@ export function Footer() {
   return (
     <footer className="bg-black text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
           <div className="sm:col-span-2 lg:col-span-1">
-            <h3 className="font-serif text-2xl mb-5 tracking-wide">
+            <h3 className="font-serif text-xl sm:text-2xl mb-4 sm:mb-5 tracking-wide">
               FASHION<span className="text-gold ml-1">MAVEN</span>
             </h3>
             <p className="text-white/60 text-xs sm:text-sm leading-relaxed max-w-xs">

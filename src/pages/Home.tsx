@@ -17,13 +17,13 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20">
         <div className="absolute inset-0">
           <img src={IMAGES.hero} alt="Fashion Maven Bridal Couture"
             className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 sm:py-16">
           <div className="max-w-2xl">
             <p className="text-gold font-sans text-[10px] sm:text-xs tracking-[0.3em] uppercase mb-4 animate-fade-in-up">
               Premium Nigerian Bridal Couture
@@ -47,11 +47,11 @@ export default function Home() {
           </div>
         </div>
         {/* Achievement Badge */}
-        <div className="absolute bottom-6 sm:bottom-10 right-4 sm:right-10 flex items-center gap-2 sm:gap-3 bg-white/10 backdrop-blur-md rounded-full px-4 sm:px-6 py-2 sm:py-3 border border-white/20">
-          <Award className="text-gold" size={18} strokeWidth={1.5} />
-          <div>
-            <p className="text-white font-serif text-sm sm:text-base font-semibold">200+ Brides</p>
-            <p className="text-white/50 text-[9px] sm:text-[10px] tracking-wide">Trusted & Beautiful</p>
+        <div className="absolute bottom-4 sm:bottom-10 right-4 sm:right-10 flex items-center gap-2 sm:gap-3 bg-black/40 backdrop-blur-md rounded-full px-3 sm:px-6 py-2 sm:py-3 border border-white/10">
+          <Award className="text-gold flex-shrink-0" size={16} strokeWidth={1.5} />
+          <div className="min-w-0">
+            <p className="text-white font-serif text-xs sm:text-base font-semibold whitespace-nowrap">200+ Brides</p>
+            <p className="text-white/50 text-[8px] sm:text-[10px] tracking-wide hidden sm:block">Trusted & Beautiful</p>
           </div>
         </div>
       </section>
@@ -81,18 +81,18 @@ export default function Home() {
             <p className="text-gold font-sans text-[10px] sm:text-[11px] tracking-[0.2em] uppercase mb-3">Our Collections</p>
             <h2 className="font-serif text-section-title text-ink">Explore Our World</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {collections.map((col, idx) => (
               <Link key={idx} to={col.category === 'ready-to-wear' ? '/shop' : '/bridal'}
                 className="group relative overflow-hidden rounded-lg aspect-[3/4] card-hover">
                 <img src={col.image} alt={col.title}
                   className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
-                  <h3 className="font-serif text-xl sm:text-2xl text-white mb-1">{col.title}</h3>
-                  <p className="text-white/60 text-[11px] sm:text-xs tracking-wide">{col.desc}</p>
-                  <span className="inline-flex items-center gap-1 text-gold text-[10px] sm:text-[11px] mt-3 group-hover:gap-2 transition-all tracking-wider uppercase">
-                    Explore <ArrowRight size={12} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-6">
+                  <h3 className="font-serif text-sm sm:text-2xl text-white mb-0.5 sm:mb-1 leading-tight">{col.title}</h3>
+                  <p className="text-white/60 text-[9px] sm:text-xs tracking-wide hidden sm:block">{col.desc}</p>
+                  <span className="inline-flex items-center gap-1 text-gold text-[9px] sm:text-[11px] mt-1.5 sm:mt-3 group-hover:gap-2 transition-all tracking-wider uppercase">
+                    Explore <ArrowRight size={10} className="sm:hidden" /><ArrowRight size={12} className="hidden sm:inline" />
                   </span>
                 </div>
               </Link>

@@ -38,9 +38,9 @@ export default function Shop() {
   return (
     <div className="min-h-screen pt-16 sm:pt-20">
       {/* Header */}
-      <section className="bg-white py-10 sm:py-12 border-b border-pearl">
+      <section className="bg-white pt-8 pb-6 sm:pt-10 sm:pb-8 border-b border-pearl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6 sm:mb-8">
+          <div className="text-center mb-5 sm:mb-8">
             <p className="text-gold font-sans text-[10px] sm:text-[11px] tracking-[0.2em] uppercase mb-3">Shop</p>
             <h1 className="font-serif text-section-title text-ink">Ready-to-Wear & Designs</h1>
             <p className="text-ash mt-3 text-xs sm:text-sm max-w-xl mx-auto">

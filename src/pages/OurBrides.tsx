@@ -11,15 +11,15 @@ export default function OurBrides() {
   return (
     <div className="min-h-screen pt-16 sm:pt-20">
       {/* Hero */}
-      <section className="relative h-[50vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[45vh] sm:h-[50vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img src={IMAGES.bride1} alt="Our Brides" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/60" />
         </div>
-        <div className="relative z-10 text-center px-4">
-          <p className="text-gold font-sans text-[10px] sm:text-xs tracking-[0.3em] uppercase mb-4">Our Brides</p>
-          <h1 className="font-serif text-display text-white mb-4">Love Stories</h1>
-          <p className="text-white/60 text-xs sm:text-base max-w-xl mx-auto leading-relaxed">
+        <div className="relative z-10 text-center px-4 max-w-2xl mx-auto">
+          <p className="text-gold font-sans text-[10px] sm:text-xs tracking-[0.3em] uppercase mb-3 sm:mb-4">Our Brides</p>
+          <h1 className="font-serif text-display text-white mb-3 sm:mb-4">Love Stories</h1>
+          <p className="text-white/60 text-xs sm:text-base leading-relaxed">
             Celebrating the beautiful brides who trusted Fashion Maven with their dream dress.
           </p>
         </div>

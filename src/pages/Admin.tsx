@@ -89,15 +89,15 @@ export default function Admin() {
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-2 mb-6 sm:mb-8 border-b border-pearl pb-4 overflow-x-auto scrollbar-hide">
+        <div className="flex gap-2 mb-6 sm:mb-8 border-b border-pearl pb-4 overflow-x-auto scrollbar-hide -mx-4 px-4 sm:mx-0 sm:px-0">
           {tabs.map(tab => (
             <button key={tab.id} onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-[10px] sm:text-[11px] tracking-wider uppercase transition-all whitespace-nowrap ${
+              className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg text-[10px] sm:text-[11px] tracking-wider uppercase transition-all whitespace-nowrap flex-shrink-0 ${
                 activeTab === tab.id
                   ? 'bg-ink text-white'
                   : 'bg-white text-graphite hover:bg-silk'
               }`}>
-              <tab.icon size={14} strokeWidth={1.5} /> {tab.label}
+              <tab.icon size={14} strokeWidth={1.5} /> <span className="hidden sm:inline">{tab.label}</span><span className="sm:hidden">{tab.label.split(' ')[0]}</span>
             </button>
           ))}
         </div>
