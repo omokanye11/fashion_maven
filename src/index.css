@@ -1,0 +1,502 @@
+@import "tailwindcss";
+
+@theme {
+  --color-white: #FFFFFF;
+  --color-ivory: #FDFCF9;
+  --color-cream: #F8F6F1;
+  --color-snow: #FAFAF8;
+  --color-silk: #F5F3EE;
+  --color-pearl: #ECEAE4;
+  --color-stone: #D4D2CC;
+  --color-ash: #9A9890;
+  --color-graphite: #4A4A48;
+  --color-charcoal: #2A2A28;
+  --color-ink: #1A1A18;
+  --color-black: #0A0A0A;
+  --color-gold: #C9A961;
+  --color-gold-light: #E8D9A8;
+  --color-gold-dark: #A8893F;
+  --color-gold-muted: #D4BE82;
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Montserrat', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #FFFFFF;
+  color: #1A1A18;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+  letter-spacing: 0.01em;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Prevent body scroll when modals/menus are open */
+body.menu-open,
+body.modal-open {
+  overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: -0.01em;
+}
+
+.font-serif {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.font-sans {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Custom scrollbar - refined */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFFFFF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C9A961;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A8893F;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes subtleGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(201, 169, 97, 0.08), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 4s infinite;
+}
+
+/* Gold accent text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #C9A961, #E8D9A8, #C9A961);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Placeholder image styling - elegant */
+.placeholder-image {
+  background: linear-gradient(135deg, #F8F6F1 0%, #ECEAE4 50%, #F5F3EE 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.placeholder-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(201, 169, 97, 0.06) 50%, transparent 60%);
+  background-size: 200% 200%;
+  animation: shimmer 5s infinite;
+}
+
+/* Button styles - sophisticated */
+.btn-black {
+  background: #0A0A0A;
+  color: #FFFFFF;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.08em;
+}
+
+.btn-black:hover {
+  background: #1A1A18;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(10, 10, 10, 0.15);
+}
+
+.btn-gold {
+  background: #C9A961;
+  color: #0A0A0A;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.08em;
+}
+
+.btn-gold:hover {
+  background: #A8893F;
+  color: #FFFFFF;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(201, 169, 97, 0.25);
+}
+
+.btn-outline-black {
+  border: 1.5px solid #0A0A0A;
+  color: #0A0A0A;
+  background: transparent;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.08em;
+}
+
+.btn-outline-black:hover {
+  background: #0A0A0A;
+  color: #FFFFFF;
+}
+
+.btn-outline-white {
+  border: 1.5px solid #FFFFFF;
+  color: #FFFFFF;
+  background: transparent;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.08em;
+}
+
+.btn-outline-white:hover {
+  background: #FFFFFF;
+  color: #0A0A0A;
+}
+
+.btn-outline-gold {
+  border: 1.5px solid #C9A961;
+  color: #C9A961;
+  background: transparent;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.08em;
+}
+
+.btn-outline-gold:hover {
+  background: #C9A961;
+  color: #FFFFFF;
+}
+
+/* Card hover - refined */
+.card-hover {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(10, 10, 10, 0.08);
+}
+
+/* Image overlay */
+.img-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.img-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(10,10,10,0.7));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.img-overlay:hover::after {
+  opacity: 1;
+}
+
+/* Cart badge - elegant */
+.cart-badge {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: #C9A961;
+  color: #0A0A0A;
+  border-radius: 50%;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  z-index: 10;
+  line-height: 1;
+}
+
+/* Divider - subtle gold */
+.divider-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C9A961, transparent);
+}
+
+/* Responsive hero text */
+.text-hero {
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.text-display {
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.text-section-title {
+  font-size: clamp(1.75rem, 4vw, 3.25rem);
+  line-height: 1.15;
+}
+
+/* Section spacing - responsive */
+.section-padding {
+  padding-top: clamp(3rem, 8vw, 7rem);
+  padding-bottom: clamp(3rem, 8vw, 7rem);
+}
+
+/* Mobile menu */
+.mobile-menu-enter {
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu-enter-active {
+  transform: translateX(0);
+}
+
+/* Luxury underline effect */
+.luxury-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.luxury-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #C9A961;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+}
+
+.luxury-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Premium section - black background */
+.section-premium {
+  background: #0A0A0A;
+  color: #FFFFFF;
+}
+
+/* Subtle texture overlay for premium sections */
+.texture-overlay {
+  position: relative;
+}
+
+.texture-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(201, 169, 97, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+/* Refined focus states */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #C9A961 !important;
+  box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.1);
+}
+
+/* Selection color */
+::selection {
+  background: #C9A961;
+  color: #FFFFFF;
+}
+
+/* Smooth transitions for all interactive elements */
+a, button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsive grid helpers */
+.grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+/* Hide scrollbar on horizontal scroll areas */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ===== OVERLAP PREVENTION FIXES ===== */
+
+/* Ensure all images don't overflow their containers */
+img {
+  max-width: 100%;
+  height: auto;
+  content-visibility: auto;
+}
+
+/* Ensure aspect ratio containers don't break */
+[class*="aspect-"] {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Fix for sticky elements not being covered by fixed navbar */
+.sticky {
+  will-change: transform;
+}
+
+/* Ensure modals and overlays have proper stacking */
+[role="dialog"],
+.modal-overlay {
+  isolation: isolate;
+}
+
+/* Fix form inputs not overflowing on mobile */
+input, select, textarea {
+  max-width: 100%;
+  min-width: 0;
+  font-size: 16px; /* Prevents iOS zoom on focus */
+}
+
+@media (min-width: 768px) {
+  input, select, textarea {
+    font-size: inherit;
+  }
+}
+
+/* Ensure buttons don't overflow their containers */
+button {
+  max-width: 100%;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* Fix for long text in cards/tables */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Safe area padding for mobile devices */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Prevent text from overflowing flex containers */
+.flex > * {
+  min-width: 0;
+}
+
+/* Ensure grid items don't overflow */
+.grid > * {
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Fix for absolute positioned elements in relative containers */
+.relative {
+  isolation: isolate;
+}
+
+/* Ensure the main content doesn't get hidden behind fixed navbar */
+main, [role="main"] {
+  position: relative;
+  z-index: 1;
+}
+
+/* Fix for the product card hover effect causing layout shift */
+.card-hover {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Ensure the trust banner text wraps properly on small screens */
+.trust-banner-item {
+  text-align: center;
+}
+
+/* Fix date inputs on mobile */
+input[type="date"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Ensure select dropdowns don't overflow */
+select {
+  text-overflow: ellipsis;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239A9890' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
