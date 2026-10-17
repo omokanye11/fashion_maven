@@ -93,13 +93,13 @@ export function Navbar() {
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-ivory/95 backdrop-blur-md shadow-md' : 'bg-transparent'
+        scrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-16 sm:h-20">
             <Link to="/" className="flex items-center space-x-2">
-              <span className="font-serif text-2xl md:text-3xl font-semibold tracking-wide text-charcoal">
-                FASHION <span className="text-gradient-gold">MAVEN</span>
+              <span className="font-serif text-xl sm:text-2xl md:text-3xl font-semibold tracking-wide text-black">
+                FASHION <span className="text-yellow">MAVEN</span>
               </span>
             </Link>
 
@@ -109,8 +109,8 @@ export function Navbar() {
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`font-sans text-sm tracking-wider uppercase transition-colors duration-200 hover:text-champagne-gold ${
-                    location.pathname === link.to ? 'text-champagne-gold border-b border-champagne-gold pb-1' : 'text-charcoal'
+                  className={`font-sans text-xs tracking-wider uppercase transition-colors duration-200 hover:text-yellow ${
+                    location.pathname === link.to ? 'text-yellow border-b-2 border-yellow pb-1' : 'text-black'
                   }`}
                 >
                   {link.label}
@@ -121,7 +121,7 @@ export function Navbar() {
             <div className="flex items-center space-x-4">
               <button
                 onClick={() => setCartOpen(true)}
-                className="relative p-2 hover:text-champagne-gold transition-colors"
+                className="relative p-2 hover:text-yellow transition-colors"
               >
                 <ShoppingBag size={22} />
                 {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
@@ -138,14 +138,14 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="lg:hidden bg-ivory border-t border-nude animate-fade-in">
+          <div className="lg:hidden bg-white border-t border-mid-gray animate-fade-in">
             <div className="px-4 py-6 space-y-4">
               {navLinks.map(link => (
                 <Link
                   key={link.to}
                   to={link.to}
                   className={`block font-sans text-sm tracking-wider uppercase py-2 ${
-                    location.pathname === link.to ? 'text-champagne-gold' : 'text-charcoal'
+                    location.pathname === link.to ? 'text-yellow' : 'text-black'
                   }`}
                 >
                   {link.label}
@@ -185,8 +185,8 @@ function CartDrawer({ onClose }: { onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-[100]">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
-      <div className="absolute right-0 top-0 bottom-0 w-full max-w-md bg-ivory shadow-2xl overflow-y-auto">
-        <div className="p-6">
+      <div className="absolute right-0 top-0 bottom-0 w-full max-w-sm sm:max-w-md bg-white shadow-2xl overflow-y-auto">
+        <div className="p-4 sm:p-6">
           <div className="flex items-center justify-between mb-6">
             <h2 className="font-serif text-2xl">
               {checkoutStep === 'cart' ? 'Shopping Bag' : 'Checkout'}
@@ -200,9 +200,9 @@ function CartDrawer({ onClose }: { onClose: () => void }) {
             <>
               {items.length === 0 ? (
                 <div className="text-center py-12">
-                  <ShoppingBag size={48} className="mx-auto text-nude mb-4" />
+                  <ShoppingBag size={48} className="mx-auto text-mid-gray mb-4" />
                   <p className="text-gray-500">Your bag is empty</p>
-                  <Link to="/shop" onClick={onClose} className="mt-4 inline-block text-champagne-gold underline">
+                  <Link to="/shop" onClick={onClose} className="mt-4 inline-block text-yellow underline">
                     Continue Shopping
                   </Link>
                 </div>
@@ -210,8 +210,8 @@ function CartDrawer({ onClose }: { onClose: () => void }) {
                 <>
                   <div className="space-y-4 mb-6">
                     {items.map((item, idx) => (
-                      <div key={idx} className="flex gap-4 p-3 bg-white rounded-lg border border-nude-light">
-                        <div className="w-20 h-24 bg-nude-light rounded overflow-hidden flex-shrink-0">
+                      <div key={idx} className="flex gap-4 p-3 bg-light-gray rounded-lg border border-mid-gray">
+                        <div className="w-20 h-24 bg-mid-gray rounded overflow-hidden flex-shrink-0">
                           {item.product.images[0] ? (
                             <img src={item.product.images[0]} alt={item.product.name} className="w-full h-full object-cover" />
                           ) : (
@@ -223,7 +223,7 @@ function CartDrawer({ onClose }: { onClose: () => void }) {
                         <div className="flex-1 min-w-0">
                           <h4 className="font-serif text-sm font-semibold truncate">{item.product.name}</h4>
                           <p className="text-xs text-gray-500 mt-1">Size: {item.size} • {item.color}</p>
-                          <p className="text-sm font-semibold text-champagne-gold mt-1">{formatPrice(item.product.price)}</p>
+                          <p className="text-sm font-semibold text-yellow mt-1">{formatPrice(item.product.price)}</p>
                           <div className="flex items-center gap-2 mt-2">
                             <button onClick={() => updateQuantity(item.product.id, item.size, item.color, item.quantity - 1)}
                               className="w-6 h-6 rounded border flex items-center justify-center text-xs">-</button>
@@ -237,13 +237,13 @@ function CartDrawer({ onClose }: { onClose: () => void }) {
                       </div>
                     ))}
                   </div>
-                  <div className="border-t border-nude pt-4">
+                  <div className="border-t border-mid-gray pt-4">
                     <div className="flex justify-between items-center mb-4">
                       <span className="font-semibold">Total</span>
-                      <span className="font-serif text-xl text-champagne-gold">{formatPrice(total)}</span>
+                      <span className="font-serif text-xl text-yellow">{formatPrice(total)}</span>
                     </div>
                     <button onClick={() => setCheckoutStep('checkout')}
-                      className="w-full btn-gold text-white py-3 rounded-lg font-semibold tracking-wider text-sm uppercase">
+                      className="w-full btn-black py-3 rounded-lg font-semibold tracking-wider text-sm uppercase">
                       Proceed to Checkout
                     </button>
                   </div>
@@ -267,8 +267,8 @@ function CartDrawer({ onClose }: { onClose: () => void }) {
                 <input type="tel" value={customerPhone} onChange={e => setCustomerPhone(e.target.value)}
                   className="w-full border border-nude rounded-lg px-4 py-2 focus:outline-none focus:border-champagne-gold" />
               </div>
-              <div className="bg-nude-light p-4 rounded-lg">
-                <p className="font-semibold text-sm">Order Total: <span className="text-champagne-gold">{formatPrice(total)}</span></p>
+              <div className="bg-light-gray p-4 rounded-lg">
+                <p className="font-semibold text-sm">Order Total: <span className="text-yellow">{formatPrice(total)}</span></p>
                 <p className="text-xs text-gray-500 mt-1">{items.length} item(s) in your bag</p>
               </div>
               <p className="text-xs text-gray-500 italic">
@@ -279,7 +279,7 @@ function CartDrawer({ onClose }: { onClose: () => void }) {
                 <Phone size={16} /> Order via WhatsApp
               </button>
               <button onClick={() => setCheckoutStep('cart')}
-                className="w-full border border-charcoal py-3 rounded-lg font-semibold tracking-wider text-sm uppercase hover:bg-charcoal hover:text-white transition-colors">
+                className="w-full border border-black py-3 rounded-lg font-semibold tracking-wider text-sm uppercase hover:bg-black hover:text-white transition-colors">
                 Back to Cart
               </button>
             </div>
@@ -293,19 +293,19 @@ function CartDrawer({ onClose }: { onClose: () => void }) {
 // ============ FOOTER ============
 export function Footer() {
   return (
-    <footer className="bg-soft-black text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-          <div className="md:col-span-1">
+    <footer className="bg-black text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+          <div className="sm:col-span-2 lg:col-span-1">
             <h3 className="font-serif text-2xl mb-4">
-              FASHION <span className="text-champagne-gold">MAVEN</span>
+              FASHION <span className="text-yellow">MAVEN</span>
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed">
               Premium Nigerian bridal couture and ready-to-wear fashion. Crafting dreams into reality since our founding.
             </p>
           </div>
           <div>
-            <h4 className="font-sans text-sm uppercase tracking-wider mb-4 text-champagne-gold">Quick Links</h4>
+            <h4 className="font-sans text-xs uppercase tracking-wider mb-4 text-yellow">Quick Links</h4>
             <div className="space-y-2">
               <Link to="/bridal" className="block text-gray-400 text-sm hover:text-white transition-colors">Bridal Couture</Link>
               <Link to="/shop" className="block text-gray-400 text-sm hover:text-white transition-colors">Ready-to-Wear</Link>
@@ -314,7 +314,7 @@ export function Footer() {
             </div>
           </div>
           <div>
-            <h4 className="font-sans text-sm uppercase tracking-wider mb-4 text-champagne-gold">Contact</h4>
+            <h4 className="font-sans text-xs uppercase tracking-wider mb-4 text-yellow">Contact</h4>
             <div className="space-y-3">
               <a href="https://wa.me/" target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-2 text-gray-400 text-sm hover:text-white transition-colors">
@@ -330,12 +330,12 @@ export function Footer() {
             </div>
           </div>
           <div>
-            <h4 className="font-sans text-sm uppercase tracking-wider mb-4 text-champagne-gold">Follow Us</h4>
+            <h4 className="font-sans text-xs uppercase tracking-wider mb-4 text-yellow">Follow Us</h4>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:border-champagne-gold hover:text-champagne-gold transition-colors">
+              <a href="#" className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:border-yellow hover:text-yellow transition-colors">
                 <Instagram size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:border-champagne-gold hover:text-champagne-gold transition-colors">
+              <a href="#" className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:border-yellow hover:text-yellow transition-colors">
                 <Facebook size={18} />
               </a>
             </div>
@@ -345,7 +345,7 @@ export function Footer() {
           </div>
         </div>
         <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-500 text-xs sm:text-sm">
             © {new Date().getFullYear()} Fashion Maven. All rights reserved. | 
             <Link to="/admin" className="ml-2 text-gray-600 hover:text-gray-400">Admin</Link>
           </p>
@@ -360,8 +360,8 @@ export function PlaceholderImage({ label, className = '' }: { label?: string; cl
   return (
     <div className={`placeholder-image ${className}`}>
       <div className="relative z-10 text-center p-4">
-        <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-champagne-gold/20 flex items-center justify-center">
-          <span className="text-champagne-gold text-lg">✦</span>
+        <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-yellow/20 flex items-center justify-center">
+          <span className="text-yellow text-lg">✦</span>
         </div>
         {label && <p className="text-xs text-gray-500 font-sans">{label}</p>}
         <p className="text-[10px] text-gray-400 mt-1">Photo by Fashion Maven</p>
@@ -374,7 +374,7 @@ export function PlaceholderImage({ label, className = '' }: { label?: string; cl
 export function ProductCard({ product }: { product: Product }) {
   return (
     <Link to={`/shop/${product.id}`} className="card-hover group block">
-      <div className="relative overflow-hidden rounded-lg aspect-[3/4] bg-nude-light">
+      <div className="relative overflow-hidden rounded-lg aspect-[3/4] bg-light-gray">
         {product.images[0] ? (
           <img src={product.images[0]} alt={product.name}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -382,13 +382,13 @@ export function ProductCard({ product }: { product: Product }) {
           <PlaceholderImage label={product.name} className="w-full h-full" />
         )}
         {product.isPlaceholder && (
-          <span className="absolute top-2 left-2 bg-gray-800/70 text-white text-[10px] px-2 py-1 rounded">
+          <span className="absolute top-2 left-2 bg-black/70 text-white text-[10px] px-2 py-1 rounded">
             Placeholder
           </span>
         )}
         {!product.available && (
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <span className="bg-white text-charcoal px-4 py-2 text-sm font-semibold">Sold Out</span>
+            <span className="bg-white text-black px-4 py-2 text-sm font-semibold">Sold Out</span>
           </div>
         )}
         <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
@@ -398,7 +398,7 @@ export function ProductCard({ product }: { product: Product }) {
         </div>
       </div>
       <div className="mt-3">
-        <h3 className="font-serif text-lg font-semibold text-charcoal group-hover:text-champagne-gold transition-colors">
+        <h3 className="font-serif text-lg font-semibold text-black group-hover:text-yellow transition-colors">
           {product.name}
         </h3>
         <p className="text-sm text-gray-500 mt-1">{formatPrice(product.price)}</p>

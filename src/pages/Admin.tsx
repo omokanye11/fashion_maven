@@ -18,14 +18,15 @@ export default function Admin() {
 
   if (!loggedIn) {
     return (
-      <div className="min-h-screen pt-20 flex items-center justify-center bg-ivory">
-        <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md border border-nude-light">
+      <div className="min-h-screen pt-20 flex items-center justify-center bg-white">
+        <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-md border border-mid-gray mx-4">
           <div className="text-center mb-8">
-            <div className="w-16 h-16 rounded-full bg-champagne-gold/10 flex items-center justify-center mx-auto mb-4">
-              <Lock size={28} className="text-champagne-gold" />
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-yellow/10 flex items-center justify-center mx-auto mb-4">
+              <Lock size={24} className="text-yellow sm:hidden" />
+              <Lock size={28} className="text-yellow hidden sm:block" />
             </div>
-            <h1 className="font-serif text-3xl">Admin Access</h1>
-            <p className="text-gray-500 text-sm mt-2">Enter your password to access the dashboard</p>
+            <h1 className="font-serif text-2xl sm:text-3xl">Admin Access</h1>
+            <p className="text-gray-500 text-xs sm:text-sm mt-2">Enter your password to access the dashboard</p>
           </div>
           <form onSubmit={(e) => {
             e.preventDefault();
@@ -38,15 +39,15 @@ export default function Admin() {
           }} className="space-y-4">
             <input type="password" placeholder="Password" value={password}
               onChange={e => { setPassword(e.target.value); setLoginError(false); }}
-              className={`w-full border rounded-lg px-4 py-3 focus:outline-none focus:border-champagne-gold ${
-                loginError ? 'border-red-400' : 'border-nude'
+              className={`w-full border rounded-lg px-4 py-3 focus:outline-none focus:border-yellow ${
+                loginError ? 'border-red-400' : 'border-mid-gray'
               }`} />
             {loginError && <p className="text-red-500 text-sm">Incorrect password. Try again.</p>}
-            <button type="submit" className="w-full btn-gold text-white py-3 rounded-lg font-semibold">
+            <button type="submit" className="w-full btn-black py-3 rounded-lg font-semibold">
               Login
             </button>
           </form>
-          <div className="mt-6 p-4 bg-nude-light rounded-lg">
+          <div className="mt-6 p-4 bg-light-gray rounded-lg">
             <p className="text-xs text-gray-500">
               <strong>Demo Password:</strong> fashionmaven2024
             </p>
@@ -73,30 +74,30 @@ export default function Admin() {
   ];
 
   return (
-    <div className="min-h-screen pt-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen pt-20 bg-light-gray">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-4">
           <div>
-            <h1 className="font-serif text-3xl">Admin Dashboard</h1>
-            <p className="text-gray-500 text-sm">Manage your Fashion Maven store</p>
+            <h1 className="font-serif text-2xl sm:text-3xl">Admin Dashboard</h1>
+            <p className="text-gray-500 text-xs sm:text-sm">Manage your Fashion Maven store</p>
           </div>
-          <div className="flex items-center gap-4">
-            <Link to="/" className="text-sm text-gray-500 hover:text-champagne-gold">View Site</Link>
+          <div className="flex items-center gap-3 sm:gap-4">
+            <Link to="/" className="text-xs sm:text-sm text-gray-500 hover:text-yellow">View Site</Link>
             <button onClick={handleLogout}
-              className="flex items-center gap-2 text-sm text-red-500 hover:text-red-700">
-              <LogOut size={16} /> Logout
+              className="flex items-center gap-2 text-xs sm:text-sm text-red-500 hover:text-red-700">
+              <LogOut size={16} /> <span className="hidden sm:inline">Logout</span>
             </button>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="flex flex-wrap gap-2 mb-8 border-b border-gray-200 pb-4">
+        <div className="flex flex-wrap gap-2 mb-6 sm:mb-8 border-b border-mid-gray pb-4 overflow-x-auto">
           {tabs.map(tab => (
             <button key={tab.id} onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-all ${
+              className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm transition-all whitespace-nowrap ${
                 activeTab === tab.id
-                  ? 'bg-champagne-gold text-white'
+                  ? 'bg-black text-white'
                   : 'bg-white text-gray-600 hover:bg-gray-100'
               }`}>
               <tab.icon size={16} /> {tab.label}
@@ -274,10 +275,10 @@ function ProductsTab() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="font-serif text-2xl">Products ({products.length})</h2>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
+        <h2 className="font-serif text-xl sm:text-2xl">Products ({products.length})</h2>
         <button onClick={() => { setShowForm(true); setEditingId(null); setForm({ name: '', category: 'ready-to-wear', description: '', price: 0, sizes: '', colors: '', images: '', isPlaceholder: true, available: true, featured: false }); }}
-          className="btn-gold text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+          className="btn-black px-4 py-2 rounded-lg text-xs sm:text-sm flex items-center gap-2">
           <Plus size={16} /> Add Product
         </button>
       </div>
@@ -341,11 +342,11 @@ function ProductsTab() {
               </label>
             </div>
             <div className="md:col-span-2 flex gap-3">
-              <button type="submit" className="btn-gold text-white px-6 py-2 rounded-lg text-sm">
+              <button type="submit" className="btn-black px-6 py-2 rounded-lg text-sm">
                 {editingId ? 'Update' : 'Add'} Product
               </button>
               <button type="button" onClick={() => { setShowForm(false); setEditingId(null); }}
-                className="border border-gray-300 px-6 py-2 rounded-lg text-sm hover:bg-gray-50">Cancel</button>
+                className="border border-mid-gray px-6 py-2 rounded-lg text-sm hover:bg-light-gray">Cancel</button>
             </div>
           </form>
         </div>
@@ -523,10 +524,10 @@ function BridesTab() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="font-serif text-2xl">Brides Gallery ({brides.length})</h2>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
+        <h2 className="font-serif text-xl sm:text-2xl">Brides Gallery ({brides.length})</h2>
         <button onClick={() => setShowForm(true)}
-          className="btn-gold text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+          className="btn-black px-4 py-2 rounded-lg text-xs sm:text-sm flex items-center gap-2">
           <Plus size={16} /> Add Bride
         </button>
       </div>
@@ -565,8 +566,8 @@ function BridesTab() {
               Mark as placeholder (no real photo yet)
             </label>
             <div className="flex gap-3">
-              <button type="submit" className="btn-gold text-white px-6 py-2 rounded-lg text-sm">Add Bride</button>
-              <button type="button" onClick={() => setShowForm(false)} className="border border-gray-300 px-6 py-2 rounded-lg text-sm">Cancel</button>
+              <button type="submit" className="btn-black px-6 py-2 rounded-lg text-sm">Add Bride</button>
+              <button type="button" onClick={() => setShowForm(false)} className="border border-mid-gray px-6 py-2 rounded-lg text-sm hover:bg-light-gray">Cancel</button>
             </div>
           </form>
         </div>

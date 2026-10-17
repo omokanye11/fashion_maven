@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ivory: #FFFFF0;
-  --color-ivory-dark: #F5F5DC;
-  --color-champagne: #F7E7CE;
-  --color-champagne-gold: #D4AF37;
-  --color-gold-dark: #B8860B;
-  --color-nude: #E8D5C4;
-  --color-nude-light: #F5EBE0;
-  --color-charcoal: #2C2C2C;
-  --color-soft-black: #1A1A1A;
+  --color-white: #FFFFFF;
+  --color-off-white: #FAFAFA;
+  --color-light-gray: #F5F5F5;
+  --color-mid-gray: #E5E5E5;
+  --color-dark-gray: #333333;
+  --color-charcoal: #1A1A1A;
+  --color-black: #000000;
+  --color-yellow: #FFD700;
+  --color-yellow-light: #FFF8DC;
+  --color-yellow-dark: #DAA520;
   --font-serif: 'Cormorant Garamond', serif;
   --font-sans: 'Montserrat', sans-serif;
 }
@@ -26,8 +27,8 @@ html {
 
 body {
   font-family: 'Montserrat', sans-serif;
-  background-color: #FFFFF0;
-  color: #2C2C2C;
+  background-color: #FFFFFF;
+  color: #1A1A1A;
   overflow-x: hidden;
 }
 
@@ -45,16 +46,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F5F5DC;
+  background: #FFFFFF;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D4AF37;
-  border-radius: 4px;
+  background: #FFD700;
+  border-radius: 3px;
 }
 
 /* Animations */
@@ -88,14 +89,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
   background-size: 200% 100%;
   animation: shimmer 3s infinite;
 }
 
-/* Gold gradient text */
-.text-gradient-gold {
-  background: linear-gradient(135deg, #D4AF37, #F7E7CE, #D4AF37);
+/* Yellow accent text */
+.text-gradient-yellow {
+  background: linear-gradient(135deg, #FFD700, #FFFFFF, #FFD700);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -103,7 +104,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Placeholder image styling */
 .placeholder-image {
-  background: linear-gradient(135deg, #F5F5DC 0%, #E8D5C4 50%, #F7E7CE 100%);
+  background: linear-gradient(135deg, #F5F5F5 0%, #E5E5E5 50%, #FAFAFA 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -115,21 +116,56 @@ h1, h2, h3, h4, h5, h6 {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, transparent 40%, rgba(212, 175, 55, 0.1) 50%, transparent 60%);
+  background: linear-gradient(135deg, transparent 40%, rgba(255, 215, 0, 0.08) 50%, transparent 60%);
   background-size: 200% 200%;
   animation: shimmer 4s infinite;
 }
 
-/* Button hover effects */
-.btn-gold {
-  background: linear-gradient(135deg, #D4AF37, #B8860B);
+/* Button styles */
+.btn-black {
+  background: #000000;
+  color: #FFFFFF;
   transition: all 0.3s ease;
 }
 
-.btn-gold:hover {
-  background: linear-gradient(135deg, #B8860B, #D4AF37);
+.btn-black:hover {
+  background: #333333;
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.btn-yellow {
+  background: #FFD700;
+  color: #000000;
+  transition: all 0.3s ease;
+}
+
+.btn-yellow:hover {
+  background: #DAA520;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+}
+
+.btn-outline-black {
+  border: 2px solid #000000;
+  color: #000000;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-black:hover {
+  background: #000000;
+  color: #FFFFFF;
+}
+
+.btn-outline-white {
+  border: 2px solid #FFFFFF;
+  color: #FFFFFF;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-white:hover {
+  background: #FFFFFF;
+  color: #000000;
 }
 
 /* Card hover */
@@ -176,8 +212,8 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   top: -6px;
   right: -6px;
-  background: #D4AF37;
-  color: white;
+  background: #FFD700;
+  color: #000000;
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -185,5 +221,27 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
+}
+
+/* Responsive utilities */
+@media (max-width: 640px) {
+  .text-responsive-hero {
+    font-size: 2.5rem;
+    line-height: 1.1;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .text-responsive-hero {
+    font-size: 4rem;
+    line-height: 1.1;
+  }
+}
+
+@media (min-width: 1025px) {
+  .text-responsive-hero {
+    font-size: 5.5rem;
+    line-height: 1.1;
+  }
 }
