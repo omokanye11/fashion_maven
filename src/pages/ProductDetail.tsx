@@ -17,8 +17,8 @@ export default function ProductDetail() {
     return (
       <div className="min-h-screen pt-20 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="font-serif text-3xl mb-4">Design Not Found</h2>
-          <Link to="/shop" className="text-champagne-gold underline">Back to Shop</Link>
+          <h2 className="font-serif text-display mb-4 text-ink">Design Not Found</h2>
+          <Link to="/shop" className="text-gold text-sm luxury-underline">Back to Shop</Link>
         </div>
       </div>
     );
@@ -41,16 +41,16 @@ export default function ProductDetail() {
     .slice(0, 4);
 
   return (
-    <div className="min-h-screen pt-20 bg-white">
+    <div className="min-h-screen pt-16 sm:pt-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        <Link to="/shop" className="inline-flex items-center gap-2 text-xs sm:text-sm text-gray-500 hover:text-yellow mb-6 sm:mb-8">
-          <ArrowLeft size={16} /> Back to Shop
+        <Link to="/shop" className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] text-ash hover:text-gold mb-6 sm:mb-8 tracking-wider uppercase">
+          <ArrowLeft size={14} strokeWidth={1.5} /> Back to Shop
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
           {/* Images */}
           <div className="space-y-4">
-            <div className="aspect-[3/4] rounded-xl overflow-hidden bg-light-gray">
+            <div className="aspect-[3/4] rounded-lg overflow-hidden bg-cream">
               {product.images[0] ? (
                 <img src={product.images[0]} alt={product.name}
                   className="w-full h-full object-cover" />
@@ -71,16 +71,16 @@ export default function ProductDetail() {
 
           {/* Details */}
           <div className="lg:py-8">
-            <p className="text-yellow font-sans text-xs sm:text-sm tracking-wider uppercase mb-2">
+            <p className="text-gold font-sans text-[10px] sm:text-[11px] tracking-[0.15em] uppercase mb-2">
               {getCategoryLabel(product.category)}
             </p>
-            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl text-black mb-4">{product.name}</h1>
-            <p className="font-serif text-2xl sm:text-3xl text-yellow mb-4 sm:mb-6">{formatPrice(product.price)}</p>
-            <p className="text-gray-600 leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">{product.description}</p>
+            <h1 className="font-serif text-display text-ink mb-4">{product.name}</h1>
+            <p className="font-serif text-2xl sm:text-3xl text-gold mb-4 sm:mb-6">{formatPrice(product.price)}</p>
+            <p className="text-graphite leading-relaxed mb-6 sm:mb-8 text-xs sm:text-sm">{product.description}</p>
 
             {product.isPlaceholder && (
-              <div className="bg-light-gray border border-mid-gray rounded-lg p-4 mb-4 sm:mb-6">
-                <p className="text-xs sm:text-sm text-gray-500">
+              <div className="bg-cream border border-pearl rounded-lg p-4 mb-4 sm:mb-6">
+                <p className="text-[10px] sm:text-[11px] text-ash">
                   ℹ️ This is a placeholder listing. Contact us via WhatsApp for availability and custom orders.
                 </p>
               </div>
@@ -88,20 +88,20 @@ export default function ProductDetail() {
 
             {!product.available && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4 sm:mb-6">
-                <p className="text-xs sm:text-sm text-red-600 font-medium">This item is currently sold out.</p>
+                <p className="text-[10px] sm:text-[11px] text-red-600 font-medium">This item is currently sold out.</p>
               </div>
             )}
 
             {/* Size Selection */}
             <div className="mb-4 sm:mb-6">
-              <label className="block text-xs sm:text-sm font-medium mb-2 sm:mb-3">Select Size</label>
+              <label className="block text-[10px] sm:text-[11px] font-medium mb-2 sm:mb-3 tracking-wide uppercase text-ink">Select Size</label>
               <div className="flex flex-wrap gap-2">
                 {product.sizes.map(size => (
                   <button key={size} onClick={() => setSelectedSize(size)}
-                    className={`px-3 sm:px-4 py-2 rounded-lg border text-xs sm:text-sm transition-all ${
+                    className={`px-3 sm:px-4 py-2 rounded-lg border text-[10px] sm:text-[11px] tracking-wider uppercase transition-all ${
                       selectedSize === size
-                        ? 'border-yellow bg-black text-white'
-                        : 'border-mid-gray hover:border-yellow'
+                        ? 'border-gold bg-ink text-white'
+                        : 'border-pearl hover:border-gold text-ink'
                     }`}>
                     {size}
                   </button>
@@ -111,14 +111,14 @@ export default function ProductDetail() {
 
             {/* Color Selection */}
             <div className="mb-6 sm:mb-8">
-              <label className="block text-xs sm:text-sm font-medium mb-2 sm:mb-3">Select Color</label>
+              <label className="block text-[10px] sm:text-[11px] font-medium mb-2 sm:mb-3 tracking-wide uppercase text-ink">Select Color</label>
               <div className="flex flex-wrap gap-2">
                 {product.colors.map(color => (
                   <button key={color} onClick={() => setSelectedColor(color)}
-                    className={`px-3 sm:px-4 py-2 rounded-lg border text-xs sm:text-sm transition-all ${
+                    className={`px-3 sm:px-4 py-2 rounded-lg border text-[10px] sm:text-[11px] tracking-wider uppercase transition-all ${
                       selectedColor === color
-                        ? 'border-yellow bg-black text-white'
-                        : 'border-mid-gray hover:border-yellow'
+                        ? 'border-gold bg-ink text-white'
+                        : 'border-pearl hover:border-gold text-ink'
                     }`}>
                     {color}
                   </button>
@@ -129,21 +129,21 @@ export default function ProductDetail() {
             {/* Actions */}
             <div className="space-y-3">
               <button onClick={handleAddToCart} disabled={!selectedSize || !selectedColor || !product.available}
-                className={`w-full py-3 sm:py-4 rounded-lg font-sans text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center gap-2 transition-all ${
-                  added ? 'bg-green-600 text-white' :
+                className={`w-full py-3 sm:py-4 rounded-lg font-sans text-[10px] sm:text-[11px] tracking-[0.15em] uppercase flex items-center justify-center gap-2 transition-all ${
+                  added ? 'bg-green-700 text-white' :
                   (!selectedSize || !selectedColor || !product.available)
-                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                    ? 'bg-pearl text-ash cursor-not-allowed'
                     : 'btn-black'
                 }`}>
-                {added ? <><Check size={18} /> Added to Bag</> : <><ShoppingBag size={18} /> Add to Bag</>}
+                {added ? <><Check size={16} strokeWidth={1.5} /> Added to Bag</> : <><ShoppingBag size={16} strokeWidth={1.5} /> Add to Bag</>}
               </button>
               <button onClick={handleWhatsAppOrder}
-                className="w-full bg-green-600 text-white py-3 sm:py-4 rounded-lg font-sans text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center gap-2 hover:bg-green-700 transition-colors">
-                <Phone size={18} /> Order via WhatsApp
+                className="w-full bg-green-700 text-white py-3 sm:py-4 rounded-lg font-sans text-[10px] sm:text-[11px] tracking-[0.15em] uppercase flex items-center justify-center gap-2 hover:bg-green-800 transition-colors">
+                <Phone size={16} strokeWidth={1.5} /> Order via WhatsApp
               </button>
             </div>
 
-            <p className="text-xs text-gray-400 mt-4">
+            <p className="text-[10px] text-ash mt-4">
               ⚠️ Demo: WhatsApp ordering opens a pre-filled message. No actual payment is processed.
             </p>
           </div>
@@ -151,20 +151,20 @@ export default function ProductDetail() {
 
         {/* Related Products */}
         {relatedProducts.length > 0 && (
-          <div className="mt-16 sm:mt-20 pt-10 sm:pt-12 border-t border-mid-gray">
-            <h2 className="font-serif text-2xl sm:text-3xl text-black mb-6 sm:mb-8">You May Also Love</h2>
+          <div className="mt-16 sm:mt-20 pt-10 sm:pt-12 border-t border-pearl">
+            <h2 className="font-serif text-2xl sm:text-3xl text-ink mb-6 sm:mb-8">You May Also Love</h2>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               {relatedProducts.map(p => (
                 <Link key={p.id} to={`/shop/${p.id}`} className="group">
-                  <div className="aspect-[3/4] rounded-lg overflow-hidden bg-light-gray mb-3">
+                  <div className="aspect-[3/4] rounded-lg overflow-hidden bg-cream mb-3">
                     {p.images[0] ? (
-                      <img src={p.images[0]} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      <img src={p.images[0]} alt={p.name} className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700" />
                     ) : (
                       <PlaceholderImage label={p.name} className="w-full h-full" />
                     )}
                   </div>
-                  <h3 className="font-serif text-base sm:text-lg group-hover:text-yellow transition-colors">{p.name}</h3>
-                  <p className="text-xs sm:text-sm text-gray-500">{formatPrice(p.price)}</p>
+                  <h3 className="font-serif text-base sm:text-lg group-hover:text-gold transition-colors text-ink">{p.name}</h3>
+                  <p className="text-[10px] sm:text-xs text-ash mt-1">{formatPrice(p.price)}</p>
                 </Link>
               ))}
             </div>

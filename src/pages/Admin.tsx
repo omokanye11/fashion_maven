@@ -7,7 +7,7 @@ import {
   getEnquiries, updateEnquiryStatus,
   getOrders, updateOrderStatus,
   getBrides, addBride,
-  formatPrice, getCategoryLabel, Category, Product, BridalEnquiry, Order, BrideGallery
+  formatPrice, getCategoryLabel, Category, Product, BridalEnquiry, Order
 } from '../store';
 
 export default function Admin() {
@@ -18,15 +18,14 @@ export default function Admin() {
 
   if (!loggedIn) {
     return (
-      <div className="min-h-screen pt-20 flex items-center justify-center bg-white">
-        <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-md border border-mid-gray mx-4">
+      <div className="min-h-screen pt-20 flex items-center justify-center bg-cream">
+        <div className="bg-white p-6 sm:p-8 rounded-xl shadow-lg w-full max-w-md border border-pearl mx-4">
           <div className="text-center mb-8">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-yellow/10 flex items-center justify-center mx-auto mb-4">
-              <Lock size={24} className="text-yellow sm:hidden" />
-              <Lock size={28} className="text-yellow hidden sm:block" />
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-4">
+              <Lock size={24} strokeWidth={1.5} className="text-gold" />
             </div>
-            <h1 className="font-serif text-2xl sm:text-3xl">Admin Access</h1>
-            <p className="text-gray-500 text-xs sm:text-sm mt-2">Enter your password to access the dashboard</p>
+            <h1 className="font-serif text-2xl sm:text-3xl text-ink">Admin Access</h1>
+            <p className="text-ash text-xs sm:text-sm mt-2">Enter your password to access the dashboard</p>
           </div>
           <form onSubmit={(e) => {
             e.preventDefault();
@@ -39,20 +38,20 @@ export default function Admin() {
           }} className="space-y-4">
             <input type="password" placeholder="Password" value={password}
               onChange={e => { setPassword(e.target.value); setLoginError(false); }}
-              className={`w-full border rounded-lg px-4 py-3 focus:outline-none focus:border-yellow ${
-                loginError ? 'border-red-400' : 'border-mid-gray'
+              className={`w-full border rounded-lg px-4 py-3 text-sm ${
+                loginError ? 'border-red-400' : 'border-pearl'
               }`} />
-            {loginError && <p className="text-red-500 text-sm">Incorrect password. Try again.</p>}
-            <button type="submit" className="w-full btn-black py-3 rounded-lg font-semibold">
+            {loginError && <p className="text-red-500 text-xs">Incorrect password. Try again.</p>}
+            <button type="submit" className="w-full btn-black py-3 rounded-lg font-sans text-[11px] tracking-[0.15em] uppercase">
               Login
             </button>
           </form>
-          <div className="mt-6 p-4 bg-light-gray rounded-lg">
-            <p className="text-xs text-gray-500">
+          <div className="mt-6 p-4 bg-cream rounded-lg">
+            <p className="text-[10px] text-ash">
               <strong>Demo Password:</strong> fashionmaven2024
             </p>
-            <p className="text-xs text-gray-400 mt-1">
-              In production, this would use secure authentication (e.g., Supabase Auth, Firebase Auth).
+            <p className="text-[10px] text-ash/60 mt-1">
+              In production, this would use secure authentication.
             </p>
           </div>
         </div>
@@ -68,44 +67,41 @@ export default function Admin() {
   const tabs = [
     { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
     { id: 'products', label: 'Products', icon: Package },
-    { id: 'enquiries', label: 'Bridal Enquiries', icon: Heart },
+    { id: 'enquiries', label: 'Enquiries', icon: Heart },
     { id: 'orders', label: 'Orders', icon: ShoppingCart },
-    { id: 'brides', label: 'Brides Gallery', icon: Users },
+    { id: 'brides', label: 'Brides', icon: Users },
   ];
 
   return (
-    <div className="min-h-screen pt-20 bg-light-gray">
+    <div className="min-h-screen pt-16 sm:pt-20 bg-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 gap-4">
           <div>
-            <h1 className="font-serif text-2xl sm:text-3xl">Admin Dashboard</h1>
-            <p className="text-gray-500 text-xs sm:text-sm">Manage your Fashion Maven store</p>
+            <h1 className="font-serif text-2xl sm:text-3xl text-ink">Admin Dashboard</h1>
+            <p className="text-ash text-[10px] sm:text-xs tracking-wide">Manage your Fashion Maven store</p>
           </div>
           <div className="flex items-center gap-3 sm:gap-4">
-            <Link to="/" className="text-xs sm:text-sm text-gray-500 hover:text-yellow">View Site</Link>
+            <Link to="/" className="text-[10px] sm:text-[11px] text-ash hover:text-gold tracking-wide">View Site</Link>
             <button onClick={handleLogout}
-              className="flex items-center gap-2 text-xs sm:text-sm text-red-500 hover:text-red-700">
-              <LogOut size={16} /> <span className="hidden sm:inline">Logout</span>
+              className="flex items-center gap-2 text-[10px] sm:text-[11px] text-red-500 hover:text-red-700 tracking-wide">
+              <LogOut size={14} strokeWidth={1.5} /> <span className="hidden sm:inline">Logout</span>
             </button>
           </div>
         </div>
 
-        {/* Tabs */}
-        <div className="flex flex-wrap gap-2 mb-6 sm:mb-8 border-b border-mid-gray pb-4 overflow-x-auto">
+        <div className="flex flex-wrap gap-2 mb-6 sm:mb-8 border-b border-pearl pb-4 overflow-x-auto scrollbar-hide">
           {tabs.map(tab => (
             <button key={tab.id} onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm transition-all whitespace-nowrap ${
+              className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-[10px] sm:text-[11px] tracking-wider uppercase transition-all whitespace-nowrap ${
                 activeTab === tab.id
-                  ? 'bg-black text-white'
-                  : 'bg-white text-gray-600 hover:bg-gray-100'
+                  ? 'bg-ink text-white'
+                  : 'bg-white text-graphite hover:bg-silk'
               }`}>
-              <tab.icon size={16} /> {tab.label}
+              <tab.icon size={14} strokeWidth={1.5} /> {tab.label}
             </button>
           ))}
         </div>
 
-        {/* Tab Content */}
         {activeTab === 'dashboard' && <DashboardTab />}
         {activeTab === 'products' && <ProductsTab />}
         {activeTab === 'enquiries' && <EnquiriesTab />}
@@ -116,35 +112,33 @@ export default function Admin() {
   );
 }
 
-// ============ DASHBOARD TAB ============
 function DashboardTab() {
   const products = getProducts();
   const enquiries = getEnquiries();
   const orders = getOrders();
   const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
-  const newEnquiries = enquiries.filter(e => e.status === 'new').length;
 
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <StatCard title="Total Products" value={products.length.toString()} icon={Package} color="bg-blue-50 text-blue-600" />
-        <StatCard title="Bridal Enquiries" value={enquiries.length.toString()} icon={Heart} color="bg-pink-50 text-pink-600" />
-        <StatCard title="Orders" value={orders.length.toString()} icon={ShoppingCart} color="bg-green-50 text-green-600" />
-        <StatCard title="Revenue" value={formatPrice(totalRevenue)} icon={BarChart3} color="bg-amber-50 text-amber-600" />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
+        <StatCard title="Products" value={products.length.toString()} icon={Package} color="bg-ink/5 text-ink" />
+        <StatCard title="Enquiries" value={enquiries.length.toString()} icon={Heart} color="bg-gold/10 text-gold" />
+        <StatCard title="Orders" value={orders.length.toString()} icon={ShoppingCart} color="bg-ink/5 text-ink" />
+        <StatCard title="Revenue" value={formatPrice(totalRevenue)} icon={BarChart3} color="bg-gold/10 text-gold" />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white p-6 rounded-xl border border-gray-200">
-          <h3 className="font-serif text-xl mb-4">Recent Enquiries</h3>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+        <div className="bg-white p-5 sm:p-6 rounded-lg border border-pearl">
+          <h3 className="font-serif text-lg sm:text-xl mb-4 text-ink">Recent Enquiries</h3>
           {enquiries.length === 0 ? (
-            <p className="text-gray-400 text-sm">No enquiries yet</p>
+            <p className="text-ash text-xs">No enquiries yet</p>
           ) : (
             <div className="space-y-3">
               {enquiries.slice(-5).reverse().map(e => (
-                <div key={e.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div key={e.id} className="flex items-center justify-between p-3 bg-cream rounded-lg">
                   <div>
-                    <p className="font-medium text-sm">{e.brideName}</p>
-                    <p className="text-xs text-gray-400">{new Date(e.createdAt).toLocaleDateString()}</p>
+                    <p className="font-medium text-xs sm:text-sm text-ink">{e.brideName}</p>
+                    <p className="text-[10px] text-ash">{new Date(e.createdAt).toLocaleDateString()}</p>
                   </div>
                   <StatusBadge status={e.status} />
                 </div>
@@ -153,17 +147,17 @@ function DashboardTab() {
           )}
         </div>
 
-        <div className="bg-white p-6 rounded-xl border border-gray-200">
-          <h3 className="font-serif text-xl mb-4">Recent Orders</h3>
+        <div className="bg-white p-5 sm:p-6 rounded-lg border border-pearl">
+          <h3 className="font-serif text-lg sm:text-xl mb-4 text-ink">Recent Orders</h3>
           {orders.length === 0 ? (
-            <p className="text-gray-400 text-sm">No orders yet</p>
+            <p className="text-ash text-xs">No orders yet</p>
           ) : (
             <div className="space-y-3">
               {orders.slice(-5).reverse().map(o => (
-                <div key={o.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div key={o.id} className="flex items-center justify-between p-3 bg-cream rounded-lg">
                   <div>
-                    <p className="font-medium text-sm">{o.customerName}</p>
-                    <p className="text-xs text-gray-400">{formatPrice(o.total)}</p>
+                    <p className="font-medium text-xs sm:text-sm text-ink">{o.customerName}</p>
+                    <p className="text-[10px] text-ash">{formatPrice(o.total)}</p>
                   </div>
                   <StatusBadge status={o.status} />
                 </div>
@@ -173,9 +167,9 @@ function DashboardTab() {
         </div>
       </div>
 
-      <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-xl">
-        <p className="text-sm text-amber-800">
-          <strong>⚠️ Demo Mode:</strong> All data is stored in browser localStorage. In production, this would connect to a secure database (e.g., Supabase, Firebase) with proper authentication and data persistence.
+      <div className="mt-6 p-4 bg-gold/5 border border-gold/20 rounded-lg">
+        <p className="text-[10px] sm:text-[11px] text-graphite">
+          <strong>⚠️ Demo Mode:</strong> All data is stored in browser localStorage. In production, this would connect to a secure database.
         </p>
       </div>
     </div>
@@ -184,14 +178,14 @@ function DashboardTab() {
 
 function StatCard({ title, value, icon: Icon, color }: { title: string; value: string; icon: any; color: string }) {
   return (
-    <div className="bg-white p-5 rounded-xl border border-gray-200">
+    <div className="bg-white p-4 sm:p-5 rounded-lg border border-pearl">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-xs text-gray-500 uppercase tracking-wider">{title}</p>
-          <p className="font-serif text-2xl font-semibold mt-1">{value}</p>
+          <p className="text-[9px] sm:text-[10px] text-ash uppercase tracking-wider">{title}</p>
+          <p className="font-serif text-xl sm:text-2xl font-semibold mt-1 text-ink">{value}</p>
         </div>
-        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${color}`}>
-          <Icon size={20} />
+        <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center ${color}`}>
+          <Icon size={18} strokeWidth={1.5} />
         </div>
       </div>
     </div>
@@ -200,24 +194,23 @@ function StatCard({ title, value, icon: Icon, color }: { title: string; value: s
 
 function StatusBadge({ status }: { status: string }) {
   const colors: Record<string, string> = {
-    new: 'bg-blue-100 text-blue-700',
-    contacted: 'bg-purple-100 text-purple-700',
-    consultation: 'bg-amber-100 text-amber-700',
-    confirmed: 'bg-green-100 text-green-700',
-    completed: 'bg-gray-100 text-gray-700',
-    pending: 'bg-amber-100 text-amber-700',
-    processing: 'bg-blue-100 text-blue-700',
-    shipped: 'bg-purple-100 text-purple-700',
-    delivered: 'bg-green-100 text-green-700',
+    new: 'bg-gold/10 text-gold',
+    contacted: 'bg-ink/5 text-ink',
+    consultation: 'bg-gold/10 text-gold-dark',
+    confirmed: 'bg-green-50 text-green-700',
+    completed: 'bg-pearl text-graphite',
+    pending: 'bg-gold/10 text-gold-dark',
+    processing: 'bg-ink/5 text-ink',
+    shipped: 'bg-ink/5 text-ink',
+    delivered: 'bg-green-50 text-green-700',
   };
   return (
-    <span className={`text-xs px-2 py-1 rounded-full font-medium ${colors[status] || 'bg-gray-100 text-gray-700'}`}>
+    <span className={`text-[9px] sm:text-[10px] px-2 py-1 rounded-full font-medium tracking-wider uppercase ${colors[status] || 'bg-pearl text-graphite'}`}>
       {status}
     </span>
   );
 }
 
-// ============ PRODUCTS TAB ============
 function ProductsTab() {
   const [products, setProducts] = useState(getProducts());
   const [showForm, setShowForm] = useState(false);
@@ -232,25 +225,14 @@ function ProductsTab() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const productData = {
-      name: form.name,
-      category: form.category,
-      description: form.description,
-      price: form.price,
+      name: form.name, category: form.category, description: form.description, price: form.price,
       sizes: form.sizes.split(',').map(s => s.trim()).filter(Boolean),
       colors: form.colors.split(',').map(s => s.trim()).filter(Boolean),
       images: form.images.split(',').map(s => s.trim()).filter(Boolean),
-      isPlaceholder: form.isPlaceholder,
-      available: form.available,
-      featured: form.featured,
+      isPlaceholder: form.isPlaceholder, available: form.available, featured: form.featured,
     };
-
-    if (editingId) {
-      updateProduct(editingId, productData);
-    } else {
-      addProduct(productData);
-    }
-    setShowForm(false);
-    setEditingId(null);
+    if (editingId) { updateProduct(editingId, productData); } else { addProduct(productData); }
+    setShowForm(false); setEditingId(null);
     setForm({ name: '', category: 'ready-to-wear', description: '', price: 0, sizes: '', colors: '', images: '', isPlaceholder: true, available: true, featured: false });
     refresh();
   };
@@ -262,40 +244,36 @@ function ProductsTab() {
       images: product.images.join(', '), isPlaceholder: product.isPlaceholder,
       available: product.available, featured: product.featured,
     });
-    setEditingId(product.id);
-    setShowForm(true);
+    setEditingId(product.id); setShowForm(true);
   };
 
   const handleDelete = (id: string) => {
-    if (confirm('Delete this product?')) {
-      deleteProduct(id);
-      refresh();
-    }
+    if (confirm('Delete this product?')) { deleteProduct(id); refresh(); }
   };
 
   return (
     <div>
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-        <h2 className="font-serif text-xl sm:text-2xl">Products ({products.length})</h2>
+        <h2 className="font-serif text-xl sm:text-2xl text-ink">Products ({products.length})</h2>
         <button onClick={() => { setShowForm(true); setEditingId(null); setForm({ name: '', category: 'ready-to-wear', description: '', price: 0, sizes: '', colors: '', images: '', isPlaceholder: true, available: true, featured: false }); }}
-          className="btn-black px-4 py-2 rounded-lg text-xs sm:text-sm flex items-center gap-2">
-          <Plus size={16} /> Add Product
+          className="btn-black px-4 py-2 rounded-lg text-[10px] sm:text-[11px] flex items-center gap-2 tracking-wider uppercase">
+          <Plus size={14} strokeWidth={1.5} /> Add Product
         </button>
       </div>
 
       {showForm && (
-        <div className="bg-white p-6 rounded-xl border border-gray-200 mb-6">
-          <h3 className="font-serif text-xl mb-4">{editingId ? 'Edit Product' : 'Add New Product'}</h3>
+        <div className="bg-white p-5 sm:p-6 rounded-lg border border-pearl mb-6">
+          <h3 className="font-serif text-lg sm:text-xl mb-4 text-ink">{editingId ? 'Edit Product' : 'Add New Product'}</h3>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Name *</label>
+              <label className="block text-[10px] sm:text-[11px] font-medium mb-1 tracking-wide uppercase">Name *</label>
               <input type="text" required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-champagne-gold" />
+                className="w-full border border-pearl rounded-lg px-3 py-2 text-sm" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Category *</label>
+              <label className="block text-[10px] sm:text-[11px] font-medium mb-1 tracking-wide uppercase">Category *</label>
               <select value={form.category} onChange={e => setForm({ ...form, category: e.target.value as Category })}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-champagne-gold">
+                className="w-full border border-pearl rounded-lg px-3 py-2 text-sm">
                 <option value="bridal-gowns">Bridal Gowns</option>
                 <option value="reception-dresses">Reception Dresses</option>
                 <option value="traditional-engagement">Traditional Engagement</option>
@@ -303,87 +281,83 @@ function ProductsTab() {
               </select>
             </div>
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium mb-1">Description</label>
+              <label className="block text-[10px] sm:text-[11px] font-medium mb-1 tracking-wide uppercase">Description</label>
               <textarea rows={3} value={form.description} onChange={e => setForm({ ...form, description: e.target.value })}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-champagne-gold resize-none" />
+                className="w-full border border-pearl rounded-lg px-3 py-2 text-sm resize-none" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Price (₦) *</label>
+              <label className="block text-[10px] sm:text-[11px] font-medium mb-1 tracking-wide uppercase">Price (₦) *</label>
               <input type="number" required value={form.price || ''} onChange={e => setForm({ ...form, price: Number(e.target.value) })}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-champagne-gold" />
+                className="w-full border border-pearl rounded-lg px-3 py-2 text-sm" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Sizes (comma-separated)</label>
+              <label className="block text-[10px] sm:text-[11px] font-medium mb-1 tracking-wide uppercase">Sizes (comma-sep)</label>
               <input type="text" value={form.sizes} onChange={e => setForm({ ...form, sizes: e.target.value })}
-                placeholder="XS, S, M, L, XL" className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-champagne-gold" />
+                placeholder="XS, S, M, L" className="w-full border border-pearl rounded-lg px-3 py-2 text-sm" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Colors (comma-separated)</label>
+              <label className="block text-[10px] sm:text-[11px] font-medium mb-1 tracking-wide uppercase">Colors (comma-sep)</label>
               <input type="text" value={form.colors} onChange={e => setForm({ ...form, colors: e.target.value })}
-                placeholder="Ivory, Gold, Nude" className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-champagne-gold" />
+                placeholder="Ivory, Gold" className="w-full border border-pearl rounded-lg px-3 py-2 text-sm" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Image URLs (comma-separated)</label>
+              <label className="block text-[10px] sm:text-[11px] font-medium mb-1 tracking-wide uppercase">Image URLs</label>
               <input type="text" value={form.images} onChange={e => setForm({ ...form, images: e.target.value })}
-                placeholder="https://..." className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-champagne-gold" />
+                placeholder="https://..." className="w-full border border-pearl rounded-lg px-3 py-2 text-sm" />
             </div>
-            <div className="flex items-center gap-6">
-              <label className="flex items-center gap-2 text-sm">
+            <div className="flex items-center gap-4 flex-wrap">
+              <label className="flex items-center gap-2 text-[10px] sm:text-[11px]">
                 <input type="checkbox" checked={form.isPlaceholder} onChange={e => setForm({ ...form, isPlaceholder: e.target.checked })} />
-                Placeholder Image
+                Placeholder
               </label>
-              <label className="flex items-center gap-2 text-sm">
+              <label className="flex items-center gap-2 text-[10px] sm:text-[11px]">
                 <input type="checkbox" checked={form.available} onChange={e => setForm({ ...form, available: e.target.checked })} />
                 Available
               </label>
-              <label className="flex items-center gap-2 text-sm">
+              <label className="flex items-center gap-2 text-[10px] sm:text-[11px]">
                 <input type="checkbox" checked={form.featured} onChange={e => setForm({ ...form, featured: e.target.checked })} />
                 Featured
               </label>
             </div>
             <div className="md:col-span-2 flex gap-3">
-              <button type="submit" className="btn-black px-6 py-2 rounded-lg text-sm">
+              <button type="submit" className="btn-black px-6 py-2 rounded-lg text-[10px] sm:text-[11px] tracking-wider uppercase">
                 {editingId ? 'Update' : 'Add'} Product
               </button>
               <button type="button" onClick={() => { setShowForm(false); setEditingId(null); }}
-                className="border border-mid-gray px-6 py-2 rounded-lg text-sm hover:bg-light-gray">Cancel</button>
+                className="border border-pearl px-6 py-2 rounded-lg text-[10px] sm:text-[11px] hover:bg-cream">Cancel</button>
             </div>
           </form>
         </div>
       )}
 
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead className="bg-gray-50 border-b border-gray-200">
+      <div className="bg-white rounded-lg border border-pearl overflow-hidden">
+        <div className="overflow-x-auto scrollbar-hide">
+          <table className="w-full text-[10px] sm:text-xs">
+            <thead className="bg-cream border-b border-pearl">
               <tr>
-                <th className="text-left px-4 py-3 font-medium">Product</th>
-                <th className="text-left px-4 py-3 font-medium">Category</th>
-                <th className="text-left px-4 py-3 font-medium">Price</th>
-                <th className="text-left px-4 py-3 font-medium">Status</th>
-                <th className="text-left px-4 py-3 font-medium">Actions</th>
+                <th className="text-left px-3 sm:px-4 py-3 font-medium tracking-wider uppercase text-ash">Product</th>
+                <th className="text-left px-3 sm:px-4 py-3 font-medium tracking-wider uppercase text-ash hidden sm:table-cell">Category</th>
+                <th className="text-left px-3 sm:px-4 py-3 font-medium tracking-wider uppercase text-ash">Price</th>
+                <th className="text-left px-3 sm:px-4 py-3 font-medium tracking-wider uppercase text-ash">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-pearl">
               {products.map(p => (
-                <tr key={p.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-12 rounded bg-nude-light overflow-hidden flex-shrink-0">
+                <tr key={p.id} className="hover:bg-cream/50">
+                  <td className="px-3 sm:px-4 py-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <div className="w-8 h-10 sm:w-10 sm:h-12 rounded bg-pearl overflow-hidden flex-shrink-0">
                         {p.images[0] ? <img src={p.images[0]} alt="" className="w-full h-full object-cover" /> : <div className="w-full h-full placeholder-image" />}
                       </div>
-                      <span className="font-medium truncate max-w-[200px]">{p.name}</span>
+                      <span className="font-medium truncate max-w-[120px] sm:max-w-[200px] text-ink">{p.name}</span>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-gray-500">{getCategoryLabel(p.category)}</td>
-                  <td className="px-4 py-3">{formatPrice(p.price)}</td>
-                  <td className="px-4 py-3">
-                    {p.available ? <span className="text-green-600 text-xs">Available</span> : <span className="text-red-500 text-xs">Sold Out</span>}
-                  </td>
-                  <td className="px-4 py-3">
+                  <td className="px-3 sm:px-4 py-3 text-ash hidden sm:table-cell">{getCategoryLabel(p.category)}</td>
+                  <td className="px-3 sm:px-4 py-3 text-ink">{formatPrice(p.price)}</td>
+                  <td className="px-3 sm:px-4 py-3">
                     <div className="flex gap-2">
-                      <button onClick={() => handleEdit(p)} className="p-1 hover:text-champagne-gold"><Edit size={16} /></button>
-                      <button onClick={() => handleDelete(p.id)} className="p-1 hover:text-red-500"><Trash2 size={16} /></button>
+                      <button onClick={() => handleEdit(p)} className="p-1 hover:text-gold"><Edit size={14} strokeWidth={1.5} /></button>
+                      <button onClick={() => handleDelete(p.id)} className="p-1 hover:text-red-500"><Trash2 size={14} strokeWidth={1.5} /></button>
                     </div>
                   </td>
                 </tr>
@@ -396,35 +370,33 @@ function ProductsTab() {
   );
 }
 
-// ============ ENQUIRIES TAB ============
 function EnquiriesTab() {
   const [enquiries, setEnquiries] = useState(getEnquiries());
   const refresh = () => setEnquiries(getEnquiries());
 
   const handleStatusChange = (id: string, status: BridalEnquiry['status']) => {
-    updateEnquiryStatus(id, status);
-    refresh();
+    updateEnquiryStatus(id, status); refresh();
   };
 
   return (
     <div>
-      <h2 className="font-serif text-2xl mb-6">Bridal Enquiries ({enquiries.length})</h2>
+      <h2 className="font-serif text-xl sm:text-2xl mb-6 text-ink">Bridal Enquiries ({enquiries.length})</h2>
       {enquiries.length === 0 ? (
-        <div className="bg-white p-12 rounded-xl border border-gray-200 text-center">
-          <Heart size={40} className="mx-auto text-gray-300 mb-4" />
-          <p className="text-gray-400">No bridal enquiries yet. They'll appear here when brides submit the enquiry form.</p>
+        <div className="bg-white p-10 sm:p-12 rounded-lg border border-pearl text-center">
+          <Heart size={32} strokeWidth={1} className="mx-auto text-pearl mb-4" />
+          <p className="text-ash text-xs sm:text-sm">No bridal enquiries yet.</p>
         </div>
       ) : (
         <div className="space-y-4">
           {enquiries.map(e => (
-            <div key={e.id} className="bg-white p-6 rounded-xl border border-gray-200">
-              <div className="flex items-start justify-between mb-4">
+            <div key={e.id} className="bg-white p-5 sm:p-6 rounded-lg border border-pearl">
+              <div className="flex flex-col sm:flex-row items-start justify-between mb-4 gap-3">
                 <div>
-                  <h3 className="font-serif text-lg font-semibold">{e.brideName}</h3>
-                  <p className="text-sm text-gray-500">{new Date(e.createdAt).toLocaleDateString()}</p>
+                  <h3 className="font-serif text-base sm:text-lg font-semibold text-ink">{e.brideName}</h3>
+                  <p className="text-[10px] sm:text-[11px] text-ash">{new Date(e.createdAt).toLocaleDateString()}</p>
                 </div>
                 <select value={e.status} onChange={ev => handleStatusChange(e.id, ev.target.value as BridalEnquiry['status'])}
-                  className="border border-gray-200 rounded-lg px-3 py-1 text-sm">
+                  className="border border-pearl rounded-lg px-3 py-1 text-[10px] sm:text-[11px]">
                   <option value="new">New</option>
                   <option value="contacted">Contacted</option>
                   <option value="consultation">Consultation</option>
@@ -432,15 +404,15 @@ function EnquiriesTab() {
                   <option value="completed">Completed</option>
                 </select>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                <div><span className="text-gray-500">Email:</span> {e.email}</div>
-                <div><span className="text-gray-500">Phone:</span> {e.phone}</div>
-                <div><span className="text-gray-500">Wedding Date:</span> {e.weddingDate || 'Not specified'}</div>
-                <div><span className="text-gray-500">Style:</span> {e.preferredStyle || 'Not specified'}</div>
-                <div><span className="text-gray-500">Budget:</span> {e.budget || 'Not specified'}</div>
-                <div><span className="text-gray-500">Appointment:</span> {e.appointmentDate || 'Not requested'}</div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 text-[10px] sm:text-xs">
+                <div><span className="text-ash">Email:</span> <span className="text-ink">{e.email}</span></div>
+                <div><span className="text-ash">Phone:</span> <span className="text-ink">{e.phone}</span></div>
+                <div><span className="text-ash">Wedding:</span> <span className="text-ink">{e.weddingDate || '—'}</span></div>
+                <div><span className="text-ash">Style:</span> <span className="text-ink">{e.preferredStyle || '—'}</span></div>
+                <div><span className="text-ash">Budget:</span> <span className="text-ink">{e.budget || '—'}</span></div>
+                <div><span className="text-ash">Appt:</span> <span className="text-ink">{e.appointmentDate || '—'}</span></div>
               </div>
-              {e.notes && <p className="mt-3 text-sm text-gray-600 bg-gray-50 p-3 rounded-lg"><strong>Notes:</strong> {e.notes}</p>}
+              {e.notes && <p className="mt-3 text-[10px] sm:text-xs text-graphite bg-cream p-3 rounded-lg"><strong>Notes:</strong> {e.notes}</p>}
             </div>
           ))}
         </div>
@@ -449,39 +421,36 @@ function EnquiriesTab() {
   );
 }
 
-// ============ ORDERS TAB ============
 function OrdersTab() {
   const [orders, setOrders] = useState(getOrders());
   const refresh = () => setOrders(getOrders());
 
   const handleStatusChange = (id: string, status: Order['status']) => {
-    updateOrderStatus(id, status);
-    refresh();
+    updateOrderStatus(id, status); refresh();
   };
 
   return (
     <div>
-      <h2 className="font-serif text-2xl mb-6">Orders ({orders.length})</h2>
+      <h2 className="font-serif text-xl sm:text-2xl mb-6 text-ink">Orders ({orders.length})</h2>
       {orders.length === 0 ? (
-        <div className="bg-white p-12 rounded-xl border border-gray-200 text-center">
-          <ShoppingCart size={40} className="mx-auto text-gray-300 mb-4" />
-          <p className="text-gray-400">No orders yet. Orders placed via WhatsApp checkout will appear here.</p>
-          <p className="text-xs text-gray-400 mt-2">Note: In demo mode, orders are simulated. Real payment integration requires backend setup.</p>
+        <div className="bg-white p-10 sm:p-12 rounded-lg border border-pearl text-center">
+          <ShoppingCart size={32} strokeWidth={1} className="mx-auto text-pearl mb-4" />
+          <p className="text-ash text-xs sm:text-sm">No orders yet.</p>
         </div>
       ) : (
         <div className="space-y-4">
           {orders.map(o => (
-            <div key={o.id} className="bg-white p-6 rounded-xl border border-gray-200">
-              <div className="flex items-start justify-between mb-4">
+            <div key={o.id} className="bg-white p-5 sm:p-6 rounded-lg border border-pearl">
+              <div className="flex flex-col sm:flex-row items-start justify-between mb-4 gap-3">
                 <div>
-                  <h3 className="font-semibold">{o.customerName}</h3>
-                  <p className="text-sm text-gray-500">{o.email} • {o.phone}</p>
-                  <p className="text-xs text-gray-400">{new Date(o.createdAt).toLocaleDateString()}</p>
+                  <h3 className="font-semibold text-sm sm:text-base text-ink">{o.customerName}</h3>
+                  <p className="text-[10px] sm:text-[11px] text-ash">{o.email} • {o.phone}</p>
+                  <p className="text-[9px] sm:text-[10px] text-ash/60">{new Date(o.createdAt).toLocaleDateString()}</p>
                 </div>
                 <div className="text-right">
-                  <p className="font-serif text-lg text-champagne-gold">{formatPrice(o.total)}</p>
+                  <p className="font-serif text-lg sm:text-xl text-gold">{formatPrice(o.total)}</p>
                   <select value={o.status} onChange={ev => handleStatusChange(o.id, ev.target.value as Order['status'])}
-                    className="border border-gray-200 rounded-lg px-3 py-1 text-sm mt-1">
+                    className="border border-pearl rounded-lg px-3 py-1 text-[10px] sm:text-[11px] mt-1">
                     <option value="pending">Pending</option>
                     <option value="confirmed">Confirmed</option>
                     <option value="processing">Processing</option>
@@ -490,11 +459,11 @@ function OrdersTab() {
                   </select>
                 </div>
               </div>
-              <div className="border-t border-gray-100 pt-3">
+              <div className="border-t border-pearl pt-3">
                 {o.items.map((item, idx) => (
-                  <div key={idx} className="flex justify-between text-sm py-1">
-                    <span>{item.name} ({item.size}, {item.color}) x{item.quantity}</span>
-                    <span>{formatPrice(item.price * item.quantity)}</span>
+                  <div key={idx} className="flex justify-between text-[10px] sm:text-xs py-1">
+                    <span className="text-graphite">{item.name} ({item.size}, {item.color}) x{item.quantity}</span>
+                    <span className="text-ink">{formatPrice(item.price * item.quantity)}</span>
                   </div>
                 ))}
               </div>
@@ -506,7 +475,6 @@ function OrdersTab() {
   );
 }
 
-// ============ BRIDES TAB ============
 function BridesTab() {
   const [brides, setBrides] = useState(getBrides());
   const [showForm, setShowForm] = useState(false);
@@ -516,8 +484,7 @@ function BridesTab() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    addBride(form);
-    setShowForm(false);
+    addBride(form); setShowForm(false);
     setForm({ brideName: '', image: '', weddingDate: '', dressStyle: '', testimonial: '', isPlaceholder: true });
     refresh();
   };
@@ -525,49 +492,49 @@ function BridesTab() {
   return (
     <div>
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-        <h2 className="font-serif text-xl sm:text-2xl">Brides Gallery ({brides.length})</h2>
+        <h2 className="font-serif text-xl sm:text-2xl text-ink">Brides Gallery ({brides.length})</h2>
         <button onClick={() => setShowForm(true)}
-          className="btn-black px-4 py-2 rounded-lg text-xs sm:text-sm flex items-center gap-2">
-          <Plus size={16} /> Add Bride
+          className="btn-black px-4 py-2 rounded-lg text-[10px] sm:text-[11px] flex items-center gap-2 tracking-wider uppercase">
+          <Plus size={14} strokeWidth={1.5} /> Add Bride
         </button>
       </div>
 
       {showForm && (
-        <div className="bg-white p-6 rounded-xl border border-gray-200 mb-6">
-          <h3 className="font-serif text-xl mb-4">Add Bride to Gallery</h3>
+        <div className="bg-white p-5 sm:p-6 rounded-lg border border-pearl mb-6">
+          <h3 className="font-serif text-lg sm:text-xl mb-4 text-ink">Add Bride to Gallery</h3>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Bride Name / Label *</label>
+              <label className="block text-[10px] sm:text-[11px] font-medium mb-1 tracking-wide uppercase">Bride Name *</label>
               <input type="text" required value={form.brideName} onChange={e => setForm({ ...form, brideName: e.target.value })}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" />
+                className="w-full border border-pearl rounded-lg px-3 py-2 text-sm" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Wedding Date/Year</label>
+              <label className="block text-[10px] sm:text-[11px] font-medium mb-1 tracking-wide uppercase">Wedding Year</label>
               <input type="text" value={form.weddingDate} onChange={e => setForm({ ...form, weddingDate: e.target.value })}
-                placeholder="e.g., 2024" className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" />
+                className="w-full border border-pearl rounded-lg px-3 py-2 text-sm" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Dress Style</label>
+              <label className="block text-[10px] sm:text-[11px] font-medium mb-1 tracking-wide uppercase">Dress Style</label>
               <input type="text" value={form.dressStyle} onChange={e => setForm({ ...form, dressStyle: e.target.value })}
-                placeholder="e.g., Custom Bridal Gown" className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" />
+                className="w-full border border-pearl rounded-lg px-3 py-2 text-sm" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Photo URL</label>
+              <label className="block text-[10px] sm:text-[11px] font-medium mb-1 tracking-wide uppercase">Photo URL</label>
               <input type="text" value={form.image} onChange={e => setForm({ ...form, image: e.target.value })}
-                placeholder="https://..." className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm" />
+                className="w-full border border-pearl rounded-lg px-3 py-2 text-sm" />
             </div>
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium mb-1">Testimonial (optional)</label>
+              <label className="block text-[10px] sm:text-[11px] font-medium mb-1 tracking-wide uppercase">Testimonial</label>
               <textarea rows={2} value={form.testimonial} onChange={e => setForm({ ...form, testimonial: e.target.value })}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm resize-none" />
+                className="w-full border border-pearl rounded-lg px-3 py-2 text-sm resize-none" />
             </div>
-            <label className="flex items-center gap-2 text-sm">
+            <label className="flex items-center gap-2 text-[10px] sm:text-[11px]">
               <input type="checkbox" checked={form.isPlaceholder} onChange={e => setForm({ ...form, isPlaceholder: e.target.checked })} />
-              Mark as placeholder (no real photo yet)
+              Mark as placeholder
             </label>
             <div className="flex gap-3">
-              <button type="submit" className="btn-black px-6 py-2 rounded-lg text-sm">Add Bride</button>
-              <button type="button" onClick={() => setShowForm(false)} className="border border-mid-gray px-6 py-2 rounded-lg text-sm hover:bg-light-gray">Cancel</button>
+              <button type="submit" className="btn-black px-6 py-2 rounded-lg text-[10px] sm:text-[11px] tracking-wider uppercase">Add</button>
+              <button type="button" onClick={() => setShowForm(false)} className="border border-pearl px-6 py-2 rounded-lg text-[10px] sm:text-[11px] hover:bg-cream">Cancel</button>
             </div>
           </form>
         </div>
@@ -575,20 +542,20 @@ function BridesTab() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {brides.map(b => (
-          <div key={b.id} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-            <div className="aspect-[3/4] bg-nude-light">
+          <div key={b.id} className="bg-white rounded-lg border border-pearl overflow-hidden">
+            <div className="aspect-[3/4] bg-cream">
               {b.image ? (
                 <img src={b.image} alt={b.brideName} className="w-full h-full object-cover" />
               ) : (
                 <div className="w-full h-full placeholder-image flex items-center justify-center">
-                  <span className="text-gray-400 text-sm">No photo</span>
+                  <span className="text-ash text-xs">No photo</span>
                 </div>
               )}
             </div>
             <div className="p-4">
-              <h3 className="font-serif font-semibold">{b.brideName}</h3>
-              <p className="text-xs text-gray-500">{b.dressStyle} • {b.weddingDate}</p>
-              {b.isPlaceholder && <span className="text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded mt-1 inline-block">Placeholder</span>}
+              <h3 className="font-serif font-semibold text-ink">{b.brideName}</h3>
+              <p className="text-[10px] sm:text-[11px] text-ash tracking-wide">{b.dressStyle} • {b.weddingDate}</p>
+              {b.isPlaceholder && <span className="text-[9px] bg-pearl text-ash px-2 py-0.5 rounded mt-1 inline-block tracking-wider uppercase">Placeholder</span>}
             </div>
           </div>
         ))}
